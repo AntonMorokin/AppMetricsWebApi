@@ -1,3 +1,5 @@
+using App.Metrics.AspNetCore;
+
 namespace AppMetricsWepApi
 {
     internal class Program
@@ -6,12 +8,16 @@ namespace AppMetricsWepApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.WebHost.UseMetrics();
 
+            // Add services to the container.
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            builder.Services.AddMetrics();
 
             var app = builder.Build();
 
@@ -27,7 +33,6 @@ namespace AppMetricsWepApi
             app.MapControllers();
 
             app.Run();
-
         }
     }
 }
