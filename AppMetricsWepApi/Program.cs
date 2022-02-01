@@ -1,4 +1,5 @@
-using App.Metrics.AspNetCore;
+using App.Metrics;
+using App.Metrics.Extensions.Configuration;
 
 namespace AppMetricsWepApi
 {
@@ -8,7 +9,14 @@ namespace AppMetricsWepApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.WebHost.UseMetrics();
+            var metrics = new MetricsBuilder()
+                .Configuration.ReadFrom(builder.Configuration)
+                .OutputMetrics.AsPrometheusPlainText()
+                .OutputMetrics.AsPrometheusProtobuf()
+                .Build();
+
+            builder.WebHost.ConfigureMetrics(metrics);
+            builder.WebHost.UsePrometheusMetrics(metrics);
 
             // Add services to the container.
             builder.Services.AddControllers();
@@ -17,7 +25,7 @@ namespace AppMetricsWepApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             
-            builder.Services.AddMetrics();
+            builder.Services.AddMetrics(metrics);
 
             var app = builder.Build();
 
