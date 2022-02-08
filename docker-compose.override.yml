@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  appmetricswebapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:80"
+  prometheus:
+    ports:
+      - "9090:9090"

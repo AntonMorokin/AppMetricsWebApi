@@ -1,7 +1,7 @@
 using App.Metrics;
 using App.Metrics.Extensions.Configuration;
 
-namespace AppMetricsWepApi
+namespace AppMetricsWebApi
 {
     internal class Program
     {

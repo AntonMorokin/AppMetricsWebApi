@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  appmetricswebapi:
+    image: ${DOCKER_REGISTRY-}appmetricswebapi
+    build:
+      context: .
+      dockerfile: AppMetricsWebApi/Dockerfile
+    container_name: appmetrics
+  prometheus:
+    image: ${DOCKER_REGISTRY-}prom/prometheus
+    build:
+      context: .
+      dockerfile: AppMetricsWebApi/Prometheus/Dockerfile
+    container_name: prometheus

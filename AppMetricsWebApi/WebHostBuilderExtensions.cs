@@ -2,7 +2,7 @@
 using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 
-namespace AppMetricsWepApi
+namespace AppMetricsWebApi
 {
     public static class WebHostBuilderExtensions
     {
