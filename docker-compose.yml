@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: AppMetricsWebApi/Dockerfile
-    container_name: appmetrics
+    container_name: webapi
   prometheus:
     image: ${DOCKER_REGISTRY-}prom/prometheus
     build:

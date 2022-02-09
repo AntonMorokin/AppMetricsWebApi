@@ -12,12 +12,8 @@ namespace AppMetricsWebApi
             {
                 o.EndpointOptions = eo =>
                 {
-                    eo.MetricsTextEndpointOutputFormatter = metrics.OutputMetricsFormatters
-                        .OfType<MetricsPrometheusTextOutputFormatter>()
-                        .First();
-
                     eo.MetricsEndpointOutputFormatter = metrics.OutputMetricsFormatters
-                        .OfType<MetricsPrometheusProtobufOutputFormatter>()
+                        .OfType<MetricsPrometheusTextOutputFormatter>()
                         .First();
                 };
             });
