@@ -1,7 +1,7 @@
-﻿using AppMetricsWepApi.Model;
+﻿using AppMetricsWebApi.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AppMetricsWepApi.Controllers
+namespace AppMetricsWebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -12,13 +12,13 @@ namespace AppMetricsWepApi.Controllers
         {
             await Task.Delay(new Random().Next(100) + 100);
 
-            return new OkResult();
+            return Ok("OK");
         }
 
         [HttpPost]
-        public Task<IActionResult> Create()
+        public Task<IActionResult> Create(Client newClient)
         {
-            return Task.FromResult<IActionResult>(new CreatedResult("api/cleints/create", null));
+            return Task.FromResult<IActionResult>(new CreatedResult($"api/clients/{newClient.Id}", "CREATED"));
         }
 
         [HttpPatch("modify")]
@@ -26,7 +26,7 @@ namespace AppMetricsWepApi.Controllers
         {
             await Task.Delay((new Random().Next(10) + 1) * 1000);
 
-            return new OkResult();
+            return Accepted($"api/cleints/{changedClient.Id}", "MODIFIED");
         }
 
         [HttpDelete("remove/{clientId}")]

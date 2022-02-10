@@ -1,4 +1,8 @@
-namespace AppMetricsWepApi
+using App.Metrics;
+using App.Metrics.Extensions.Configuration;
+using App.Metrics.Formatters.Prometheus;
+
+namespace AppMetricsWebApi
 {
     internal class Program
     {
@@ -6,10 +10,18 @@ namespace AppMetricsWepApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            var metrics = new MetricsBuilder()
+                .Configuration.ReadFrom(builder.Configuration)
+                .OutputMetrics.AsPrometheusPlainText()
+                .Build();
+
+            // Not good but fast
+            builder.WebHost
+                .ConfigureMetrics(metrics)
+                .UsePrometheusMetrics(metrics);
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -22,12 +34,9 @@ namespace AppMetricsWepApi
                 app.UseSwaggerUI();
             }
 
-            app.UseAuthorization();
-
             app.MapControllers();
 
             app.Run();
-
         }
     }
 }

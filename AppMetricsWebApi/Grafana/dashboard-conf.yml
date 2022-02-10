@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: dashboard-from-json
+    orgId: 1
+    folder: WebApi
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 3600
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: false

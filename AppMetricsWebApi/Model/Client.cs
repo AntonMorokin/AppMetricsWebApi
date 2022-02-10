@@ -1,4 +1,4 @@
-﻿namespace AppMetricsWepApi.Model
+﻿namespace AppMetricsWebApi.Model
 {
     public class Client
     {

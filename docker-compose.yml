@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  appmetricswebapi:
+    image: ${DOCKER_REGISTRY-}appmetricswebapi
+    build:
+      context: .
+      dockerfile: AppMetricsWebApi/Dockerfile
+    container_name: webapi
+  prometheus:
+    image: ${DOCKER_REGISTRY-}prom/prometheus
+    build:
+      context: .
+      dockerfile: AppMetricsWebApi/Prometheus/Dockerfile
+    container_name: prometheus
+  grafana:
+    image: ${DOCKER_REGISTRY-}grafana/grafana-oss
+    build:
+      context: .
+      dockerfile: AppMetricsWebApi/Grafana/Dockerfile
+    container_name: grafana
+    depends_on:
+      - prometheus

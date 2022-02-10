@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  appmetricswebapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "5000:5000"
+  prometheus:
+    ports:
+      - "9090:9090"
+  grafana:
+    ports:
+      - "3000:3000"
